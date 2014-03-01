@@ -1,0 +1,19 @@
+{
+  "name": "cartified",
+  "version": "1.0.0",
+  "authors": [
+    "Med Elharrak <med.elharrak@gmail.com>"
+  ],
+  "description": "basic shopping cart in Angular.js",
+  "main": "./index.html",
+  "keywords": [
+    "cart",
+    "angular"
+  ],
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "angular": "~1.2.13",
+    "angular-route": "~1.2.13"
+  }
+}
