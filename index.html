@@ -11,7 +11,13 @@
     <div ng-view></div>
 
     <script type="text/ng-template" id="list.html">
-        <h1> List <h1>
+        <ul controller="listCtrl">
+            <li ng-repeat="item in items track by $index">
+                <h3>{{item.brand +' - ' +item.label}}</h3>
+                <label>Qty:</label>
+                <input type="text" ng-model="item.quantity" ng-init="item.quantity = 1">
+            </li>
+        </ul>
     </script>
     <script type="text/ng-template" id="checkout.html">
         <h1> Checkout <h1>
@@ -20,7 +26,8 @@
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="js/app.js"></script>
-    <script src="js/controllers/cartControllers.js"></script>
+    <script src="js/controllers/cart-controllers.js"></script>
+    <script src="js/services/cart-services.js"></script>
 </body>
 
 </html>

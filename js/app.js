@@ -1,7 +1,7 @@
 /*global angular */
 'use strict';
 
-var cartified = angular.module('cartified', ['ngRoute', 'cartCtrl']);
+var cartified = angular.module('cartified', ['ngRoute', 'cartCtrl', 'services.cart']);
 
 cartified.config(['$routeProvider',
     function ($routeProvider) {
