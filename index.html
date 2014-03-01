@@ -16,11 +16,21 @@
                 <h3>{{item.brand +' - ' +item.label}}</h3>
                 <label>Qty:</label>
                 <input type="text" ng-model="item.quantity" ng-init="item.quantity = 1">
+                <button ng-click="addToCart(item)">Add</button>
             </li>
         </ul>
     </script>
     <script type="text/ng-template" id="checkout.html">
-        <h1> Checkout <h1>
+        <ul>
+            <li ng-repeat="(key, item) in cart track by $index">
+                <h3>{{items[key].brand + " - "+items[key].label}}</h3>
+                <label>Qty:</label>
+                <input type="text" value="{item.quantity}}" ng-model="item.quantity">
+                <button ng-click="changeQuantity(item)">Update</button>
+                <button ng-click="removeFromCart(item)">Remove</button>
+            </li>
+        </ul>
+        <button ng-click="clear()">Clear</button>
     </script>
 
     <script src="bower_components/angular/angular.js"></script>
