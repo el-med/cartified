@@ -1,15 +1,15 @@
 /*global angular */
 'use strict';
 
-var cartified = angular.module('cartified', ['ngRoute', 'cartCtrl', 'services.cart']);
+var cartified = angular.module('cartified', ['ngRoute', 'cartCtrl', 'services.cart', 'filters']);
 
 cartified.config(['$routeProvider',
     function ($routeProvider) {
         $routeProvider.when('/', {
-            templateUrl: 'list.html',
+            templateUrl: 'views/list.html',
             controller: 'ListCtrl'
         }).when('/checkout', {
-            templateUrl: 'checkout.html',
+            templateUrl: 'views/checkout.html',
             controller: 'CheckoutCtrl'
         }).otherwise({
             redirectTo: '/'

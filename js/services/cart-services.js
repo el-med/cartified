@@ -11,17 +11,23 @@ cart.service('Items', [
                 '1': {
                     id: 1,
                     brand: 'Nike',
-                    label: "Lunargato II"
+                    label: "Lunargato II",
+                    img: "lunargato.jpg",
+                    price: 375
                 },
                 '2': {
                     id: 2,
                     brand: 'adidas',
-                    label: "Nitrocharge 2.0 Trx FG"
+                    label: "Nitrocharge 2.0 Trx FG",
+                    img: "nitrocharge.jpg",
+                    price: 425
                 },
                 '3': {
                     id: 3,
                     brand: 'Puma',
-                    label: "Xenon TR SL2"
+                    label: "Xenon",
+                    img: "xenon.jpg",
+                    price: 240
                 }
             };
         };
@@ -61,8 +67,6 @@ cart.service('CartStorage', ['$rootScope',
             this.persist(cart);
         };
 
-        this.save = function () {};
-
         this.remove = function (id) {
             var cart = this.getCart();
             delete cart[id];
@@ -83,6 +87,16 @@ cart.service('CartStorage', ['$rootScope',
                 cart[id].quantity = parseInt(quantity, 10);
                 this.persist(cart);
             }
+        };
+
+        this.getTotalItems = function () {
+            var key, sum = 0, cart = this.getCart();
+            for (key in cart) {
+                if (cart.hasOwnProperty(key)) {
+                    sum += parseInt(cart[key].quantity, 10);
+                }
+            }
+            return sum;
         };
 
         this.refresh = function () {
