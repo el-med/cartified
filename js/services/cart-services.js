@@ -34,9 +34,22 @@ cart.service('Items', [
     }
 ]);
 
+cart.service('Reviewer', [ '$q', '$timeout',
+    function ($q, $timeout) {
+        this.review = function (cart) {
+            var deferred = $q.defer();
 
-cart.service('CartStorage', ['$rootScope',
-    function ($rootScope) {
+            $timeout(function() {
+              deferred.resolve(true);
+            }, 2000);
+
+            return deferred.promise;
+        };
+    }
+]);
+
+cart.service('CartStorage', ['$rootScope', 'Reviewer',
+    function ($rootScope, Reviewer) {
         var STORAGE_ID = "cart";
 
         this.getCart = function () {
@@ -53,7 +66,14 @@ cart.service('CartStorage', ['$rootScope',
             if (noPersist) {
                 return;
             }
-            this.persist(cart);
+            this.save(cart);
+        };
+
+        this.save = function (cart) {
+            var self = this;
+            Reviewer.review(cart).then(function(){
+                self.persist(cart);
+            });
         };
 
         this.addItems = function (items) {
@@ -64,17 +84,17 @@ cart.service('CartStorage', ['$rootScope',
                     this.addItem(items[id], true);
                 }
             }
-            this.persist(cart);
+            this.save(cart);
         };
 
         this.remove = function (id) {
             var cart = this.getCart();
             delete cart[id];
-            this.persist(cart);
+            this.save(cart);
         };
 
         this.clear = function () {
-            this.persist({});
+            this.save({});
         };
 
         this.persist = function (cart) {
